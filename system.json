@@ -1,7 +1,7 @@
 {
   "id": "fage",
-  "title": "Fage",
-  "description": "The Boilerplate system for FoundryVTT!",
+  "title": "Fage - Faisceau d'Aurora Game Engine",
+  "description": "The first version of the FAGE system for Foundry VTT. This is a totally homebrew system, inspired by multiples RPG. This is designed for beginner players with more implementation for experimented players.",
   "authors": [
     {
       "name": "Asacolips",
@@ -27,7 +27,7 @@
       "thumbnail": "systems/fage/assets/wallpaper.jpg"
     }
   ],
-  "version": "2.0.0",
+  "version": "1.0.0",
   "compatibility": {
     "minimum": 11,
     "verified": "12.324"
