@@ -1,0 +1,169 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "health": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "power": {
+          "value": 5,
+          "min": 0,
+          "max": 5
+        },
+        "biography": "",
+        "race" : "",
+        "faction": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      
+      "attributes": {
+        "level": {
+          "value": 0
+        },
+        "experience" : {
+          "value": 0 
+        },
+        "taille" : {
+          "value":170
+        },
+        "poids" : {
+          "value": 60
+        },
+        "age" : {
+          "value": 25
+        },
+        "fatigue" : {
+          "value":0
+        },
+        "blessure" : {
+          "value":0
+        },
+        "talent" : {
+          "value":""
+        }
+        
+      },
+      "abilities": {
+        "str": {
+          "value": 1
+        },
+        
+        "con": {
+          "value": 1
+        },
+        "cha": {
+          "value": 1
+        },
+        "int": {
+          "value": 1
+        },
+        
+        
+        "wis": {
+          "value": 1
+        },
+        
+        "dex": {
+          "value": 1
+        }
+        
+        
+        
+      },
+      "statSecondaire" : {
+        "precision" : {
+          "value" : 0
+        },
+        "degatphys" : {
+          "value" : 0
+        },
+        "magie" : {
+          "value" : 0
+        },
+        "critique" : {
+          "value" : 0
+        },
+        "buffdebuff" : {
+          "value" : 0
+        },
+        "parade" : {
+          "value" : 0
+        },
+        "RM" : {
+          "value" : 0
+        },
+        "esquive" : {
+          "value" : 0
+        },
+        "rapidite" : {
+          "value" : 0
+        },
+        "furtivite" : {
+          "value" : 0
+        },
+        "perception" : {
+          "value" : 0
+        },
+        "charisme" : {
+          "value" : 0
+        },
+        "maxQuantity" : {
+          "value" : 18
+        }
+      }
+    },
+    "npc": {
+      "templates": ["base"],
+      "abilities": {
+        
+        "statSecondaire": {
+          "rapidite": {
+            "value": 1
+          },
+          "dégâts" : {
+            "value": 1
+          },
+          "parade" :{
+            "value": 0
+          },
+          "RM" : {
+            "value" : 0
+          }
+          
+        }
+      }
+    }
+  },
+  "Item": {
+    "types": ["item", "feature", "spell"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "item": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0,
+      "formula": "d20 + @str.mod + ceil(@lvl / 2)",
+      "equipement" :{
+        "isEquipement" : false,
+        "value": 0,
+        "stat" : "",
+        "script": ""
+      }
+    },
+    "feature": {
+      "templates": ["base"]
+    },
+    "spell": {
+      "templates": ["base"],
+      "spellLevel": 1
+    }
+  }
+}

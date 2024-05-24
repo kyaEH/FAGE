@@ -1,0 +1,166 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    
+          
+          
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+      
+      {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+      use both the "grid" and "grid-Ncol" class where "N" can be any number
+      from 1 to 12 and will create that number of columns.  --}}
+      <div class="resources grid grid-3col">
+
+        {{!-- "flex-group-center" is also defined in the _grid.scss file
+        and it will add a small amount of padding, a border, and will
+        center all of its child elements content and text. --}}
+        <div class="resource flex-group-center">
+          <label for="system.health.value" class="resource-label">PV</label>
+          <div class="resource-content flexrow flex-right">
+          <input type="text" name="system.health.value" name="pvact" value="{{system.health.value}}" data-dtype="Number"/>
+          <span> / </span>
+          <input type="text" name="system.health.max" name="pvmax" value="{{system.health.max}}" data-dtype="Number"/>
+          </div>
+          
+        </div>
+        <div class="resource flex-group-center">
+          <label for="system.power.value" class="resource-label">Mana</label>
+          <div class="resource-content flexrow flex-right flex-between">
+          <input type="text" name="system.power.value" name="manaact" value="{{system.power.value}}" data-dtype="Number"/>
+          <span> / </span>
+          <input type="text" name="system.power.max" name="manamax" value="{{system.power.max}}" data-dtype="Number"/>
+          </div>
+        </div>
+          <div class="resource flex-group-center">
+          <label for="" class="resource-label">Fatigue / Blessures</label>
+          <div class="resource-content flexrow flex-right flex-between">
+          <input type="text" name="system.attributes.fatigue.value" id="fatigue" value="{{system.attributes.fatigue.value}}" data-dtype="Number"/>
+          <span> / </span>
+          <input type="text" name="system.attributes.blessure.value" id="blessure" value="{{system.attributes.blessure.value}}" data-dtype="Number"/>
+          </div>
+        </div>
+        
+      <div class="resource flex-group-center">
+        <label for="system.attributes.experience.value" class="resource-label">XP</label>
+        <div class="resource-content flexrow flex-left">
+        <input type="text" name="system.attributes.experience.value" value="{{system.attributes.experience.value}}" id="experience" data-dtype="Number"/>
+        
+        </div>
+      </div>
+      <div class="resource flex-group-center">
+          <label for="system.attributes.level.value" class="resource-label">Level</label>
+          <div class="resource-content flexrow flex-left">
+          <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" id="niveau" data-dtype="Number" disabled />
+          
+          </div>
+          
+        </div>
+        <div class="resource flex-group-center">
+          <label for="" class="resource-label">Taille / Poids / Age</label>
+          <div class="resource-content flexrow flex-left">
+          <input type="text" id="taille" name="system.attributes.taille.value" value="{{system.attributes.taille.value}}" data-dtype="Number" />
+          <input type="text" id="poids" name="system.attributes.poids.value" value="{{system.attributes.poids.value}}" data-dtype="Number" />
+          <input type="text" id="age" name="system.attributes.age.value" value="{{system.attributes.age.value}}" data-dtype="Number" />
+
+          </div>
+          
+        </div>
+      </div><hr>
+      <div class="resource flex-group-center "><button class="fantasy-btn" name="longrest" id="longrest">Long repos</button></div>
+    </div>
+    
+    
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    {{!-- Default tab is specified in actor-sheet.mjs --}}
+    <a class="item" data-tab="features">Statistiques</a>
+    <a class="item" data-tab="spells">Compétences</a>
+    <a class="item" data-tab="items">Inventaire</a>
+    <a class="item" data-tab="description">Description</a>
+
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Owned Features Tab --}}
+    <div class="tab features" data-group="primary" data-tab="features">
+      <section class="grid grid-3col">
+        <aside class="sidebar">
+
+          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+          use both the "grid" and "grid-Ncol" class where "N" can be any number
+          from 1 to 12 and will create that number of columns.  --}}
+          <h2>Statistiques</h2>
+          <div class="abilities flexcol">
+            <h3>Principales</h3>
+            {{#each system.abilities as |ability key|}}
+            {{#ifnoteq ability.label "rapidite"}}
+              <div class="ability flexrow flex-group-right">
+                <label for="system.abilities.{{key}}.value" class="resource-label flexlarge align-left" data-roll="d20" data-label="{{ability.label}}">{{ability.label}}</label>
+                <input type="number" id="{{ability.label}}" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+              </div>
+              {{/ifnoteq}}
+              {{/each}}
+              <div class="ability flexrow flex-group-right">
+              <label class="resource-label flexlarge align-left">Points restants</label>
+              <input type="text" id="remaining" disabled>
+              </div>
+              <h3>Talents</h3>
+              <div class="ability flexrow flex-group-left">
+                <textarea style="height: 100px;" name="system.attributes.talent.value">{{system.attributes.talent.value}}</textarea>
+              </div>
+              
+
+              
+
+              
+          </div>
+          
+          <div class="abilities flexcol">
+          
+          </div>
+        </aside>
+
+        {{!-- For the main features list, span the right two columns --}}
+        <section class="main grid-span-2">
+          
+          {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
+          {{> "systems/fage/templates/actor/parts/actor-features.hbs"}}
+        </section>
+        
+      </section>
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab biography" data-group="primary" data-tab="description">
+      {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
+      <label>Race</label><input name="system.race" type="text" value="{{system.race}}">
+      <label>Faction</label><input name="system.faction" type="text" value="{{system.faction}}">
+      Bloc note:
+      {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}
+    </div>
+
+    {{!-- Owned Items Tab --}}
+    <div class="tab items" data-group="primary" data-tab="items">
+       {{> "systems/fage/templates/actor/parts/actor-items.hbs"}}
+    </div>
+
+    {{!-- Owned Spells Tab --}}
+    <div class="tab spells" data-group="primary" data-tab="spells">
+      {{> "systems/fage/templates/actor/parts/actor-spells.hbs"}}
+    </div>
+
+    {{!-- Active Effects Tab --}}
+    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+      {{> "systems/fage/templates/actor/parts/actor-effects.hbs"}}
+    </div>
+
+
+</form>
+<script src="systems/fage/js/statsCalc.js"></script>

@@ -1,0 +1,835 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+/* Global styles */
+.window-app {
+  font-family: "Roboto", sans-serif;
+  
+}
+
+.rollable:hover, .rollable:focus {
+  color: #fff;
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.grid,
+.grid-2col {
+  display: grid;
+  grid-column: span 2/span 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.grid-3col {
+  grid-column: span 3/span 3;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4col {
+  grid-column: span 4/span 4;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-5col {
+  grid-column: span 5/span 5;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-6col {
+  grid-column: span 6/span 6;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-7col {
+  grid-column: span 7/span 7;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-8col {
+  grid-column: span 8/span 8;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.grid-9col {
+  grid-column: span 9/span 9;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+.grid-10col {
+  grid-column: span 10/span 10;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.grid-11col {
+  grid-column: span 11/span 11;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.grid-12col {
+  grid-column: span 12/span 12;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-start-2 {
+  grid-column-start: 2;
+}
+
+.grid-start-3 {
+  grid-column-start: 3;
+}
+
+.grid-start-4 {
+  grid-column-start: 4;
+}
+
+.grid-start-5 {
+  grid-column-start: 5;
+}
+
+.grid-start-6 {
+  grid-column-start: 6;
+}
+
+.grid-start-7 {
+  grid-column-start: 7;
+}
+
+.grid-start-8 {
+  grid-column-start: 8;
+}
+
+.grid-start-9 {
+  grid-column-start: 9;
+}
+
+.grid-start-10 {
+  grid-column-start: 10;
+}
+
+.grid-start-11 {
+  grid-column-start: 11;
+}
+
+.grid-start-12 {
+  grid-column-start: 12;
+}
+
+.grid-span-2 {
+  grid-column-end: span 2;
+}
+
+.grid-span-3 {
+  grid-column-end: span 3;
+}
+
+.grid-span-4 {
+  grid-column-end: span 4;
+}
+
+.grid-span-5 {
+  grid-column-end: span 5;
+}
+
+.grid-span-6 {
+  grid-column-end: span 6;
+}
+
+.grid-span-7 {
+  grid-column-end: span 7;
+}
+
+.grid-span-8 {
+  grid-column-end: span 8;
+}
+
+.grid-span-9 {
+  grid-column-end: span 9;
+}
+
+.grid-span-10 {
+  grid-column-end: span 10;
+}
+
+.grid-span-11 {
+  grid-column-end: span 11;
+}
+
+.grid-span-12 {
+  grid-column-end: span 12;
+}
+
+.flex-group-center,
+.flex-group-left,
+.flex-group-right {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex-group-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.flex-group-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.flexshrink {
+  flex: 0;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flexlarge {
+  flex: 2;
+}
+
+.align-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.align-center {
+  justify-content: center;
+  text-align: center;
+}
+.window-app .window-content {
+  background: url("../assets/wallpaper.jpg")  no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color:#A3C7D6;
+  
+}
+
+
+/* Styles limited to boilerplate sheets */
+.boilerplate .item-form {
+  font-family: "Roboto", sans-serif;
+}
+.boilerplate input[type="text"],.boilerplate input[type="number"]{
+  color: #A3C7D6;
+}
+
+.boilerplate h1,h2,h3{
+  font-family: 'Uncial Antiqua', 'Merriweather', serif;
+  border-bottom:1px solid white;
+}
+.boilerplate .sheet-header {
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.boilerplate .sheet-header,.boilerplate .sheet-tabs,.boilerplate  .sheet-body {
+  background-color: rgba(108, 89, 140, 0.65);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+.sheet-header,.sheet-body {
+  padding:5px;
+  border-radius:5px;
+}
+
+.boilerplate .sheet-header .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+
+.boilerplate .sheet-header .header-fields {
+  flex: 1;
+}
+.boilerplate .sheet-header h1.charname {
+  height: 50px;
+  padding: 0px;
+  margin: 5px 0;
+  border-bottom: 0;
+}
+.boilerplate .sheet-header h1.charname input {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.boilerplate .sheet-tabs {
+  flex: 0;
+}
+.boilerplate .sheet-body,
+.boilerplate .sheet-body .tab,
+.boilerplate .sheet-body .tab .editor {
+  height: 100%;
+}
+.boilerplate .tox .tox-editor-container {
+  background: #fff;
+}
+.boilerplate .tox .tox-edit-area {
+  padding: 0 8px;
+}
+.boilerplate .resource-label {
+  font-weight: bold;
+}
+
+.boilerplate .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+}
+.boilerplate .items-header > * {
+  font-size: 14px;
+  text-align: center;
+}
+.boilerplate .items-header .item-name {
+  font-weight: bold;
+  padding-left: 5px;
+  text-align: left;
+  display: flex;
+}
+.boilerplate .items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: #A3C7D6;
+}
+.boilerplate .items-list .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.boilerplate .items-list .item-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+  display: flex;
+}
+.boilerplate .items-list .item-name h3, .boilerplate .items-list .item-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.boilerplate .items-list .item-controls {
+  display: flex;
+  flex: 0 0 100px;
+  justify-content: flex-end;
+}
+.boilerplate .items-list .item-controls a {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 6px;
+}
+.boilerplate .items-list .item {
+  align-items: center;
+  padding: 0 2px;
+  border-bottom: 1px solid #c9c7b8;
+}
+.boilerplate .items-list .item:last-child {
+  border-bottom: none;
+}
+.boilerplate .items-list .item .item-name {
+  color: #A3C7D6;
+}
+.boilerplate .items-list .item .item-name .item-image {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  border: none;
+  margin-right: 5px;
+}
+.boilerplate .items-list .item-prop {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.boilerplate .items-list .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+}
+.boilerplate .items-list .items-header > * {
+  font-size: 12px;
+  text-align: center;
+}
+.boilerplate .items-list .items-header .item-name {
+  padding-left: 5px;
+  text-align: left;
+}
+.boilerplate .item-formula {
+  flex: 0 0 200px;
+  padding: 0 8px;
+}
+.boilerplate .effects .item .effect-source,
+.boilerplate .effects .item .effect-duration,
+.boilerplate .effects .item .effect-controls {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.boilerplate .effects .item .effect-controls {
+  border: none;
+}
+
+.ability div{
+  margin-bottom:5px;
+}
+
+@layer fantasy-btn {
+  [class*="fantasy-btn"] {
+    isolation: isolate;
+    position: relative;
+    box-sizing: border-box;
+    outline: none;
+    border: none !important;
+    --s: (var(--scale) / 4.5);
+    background-color: rgba(108, 89, 140, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    min-width: calc(280px * var(--s));
+    min-height: calc(200px * var(--s));
+    padding-inline: calc(95px * var(--s));
+    padding-block: calc(51px * var(--s));
+  }
+  .fantasy-btn-xs { --scale: 0.5; }
+  .fantasy-btn-sm { --scale: 0.75; }
+  .fantasy-btn, .fantasy-btn-md { --scale: 1; }
+  .fantasy-btn-lg { --scale: 1.25; }
+  .fantasy-btn-xl { --scale: 1.5; }
+  .fantasy-btn-2xl { --scale: 2; }
+  .fantasy-btn-3xl { --scale: 3; }
+  
+  [class*="fantasy-btn"] {
+    --_text-base-color: var(--text-color);
+    --_text-hover-color: var(--text-hover-color, var(--_text-base-color));
+    --_text-focus-color: var(--text-focus-color, var(--_text-hover-color));
+    --_text-active-color: var(--text-active-color, var(--_text-focus-color));
+    --_text-state-color: var(--_text-base-color);
+    color: var(--_text-state-color);
+    --_text-base-shadow: var(--text-shadow);
+    --_text-hover-shadow: var(--text-hover-shadow, var(--_text-base-shadow));
+    --_text-focus-shadow: var(--text-focus-shadow, var(--_text-hover-shadow));
+    --_text-active-shadow: var(--text-active-shadow, var(--_text-focus-shadow));
+    --_text-state-shadow: var(--_text-base-shadow);
+    text-shadow: var(--_text-state-shadow);
+
+    --_outline-base-color: var(--outline-color, currentColor);
+    --_outline-hover-color: var(--outline-hover-color, var(--_outline-base-color));
+    --_outline-focus-color: var(--outline-focus-color, var(--_outline-hover-color));
+    --_outline-active-color: var(--outline-active-color, var(--_outline-focus-color));
+    --_outline-state-color: var(--_outline-base-color);
+
+    --_outline-base-size: var(--outline-size, 0px);
+    --_outline-hover-size: var(--outline-hover-size, calc(5px * var(--s)));
+    --_outline-focus-size: var(--outline-focus-size, var(--_outline-hover-size));
+    --_outline-active-size: var(--outline-active-size, var(--_outline-focus-size));
+    --_outline-state-size: var(--_outline-base-size);
+
+    --_outline-base-offset: var(--outline-offset, 0px);
+    --_outline-hover-offset: var(--outline-hover-offset, calc(15px * var(--s)));
+    --_outline-focus-offset: var(--outline-focus-offset,
+      var(--_outline-hover-offset)
+    );
+    --_outline-active-offset: var(--outline-active-offset,
+      var(--_outline-focus-offset)
+    );
+    --_outline-state-offset: var(--_outline-base-offset);
+    
+    --_outline-base-style: var(--outline-style, none);
+    --_outline-hover-style: var(--outline-hover-style, var(--_outline-base-style));
+    --_outline-focus-style: var(--outline-focus-style, solid);
+    --_outline-active-style: var(--outline-active-style, var(--_outline-focus-style));
+    --_outline-state-style: var(--_outline-base-style);
+    
+    outline: var(--_outline-state-size) var(--_outline-state-style) var(--_outline-state-color);
+    outline-offset: var(--_outline-state-offset);
+  }
+  .fantasy-btn-xl,
+  .fantasy-btn-2xl,
+  .fantasy-btn-3xl {
+    --_outline-hover-offset: var(--outline-hover-offset,
+      calc(-68px * var(--s))
+    );
+  }
+  [class*="fantasy-btn"]:hover {
+    --_text-state-color: var(--_text-hover-color);
+    --_text-state-shadow: var(--_text-hover-shadow);
+    --_outline-state-size: var(--_outline-hover-size);
+    --_outline-state-style: var(--_outline-hover-style);
+    --_outline-state-color: var(--_outline-hover-color);
+    --_outline-state-offset: var(--_outline-hover-offset);
+  }
+  [class*="fantasy-btn"]:focus {
+    --_text-state-color: var(--_text-focus-color);
+    --_text-state-shadow: var(--_text-focus-shadow);
+    --_outline-state-size: var(--_outline-focus-size);
+    --_outline-state-style: var(--_outline-focus-style);
+    --_outline-state-color: var(--_outline-focus-color);
+    --_outline-state-offset: var(--_outline-focus-offset);
+  }
+  [class*="fantasy-btn"]:active {
+    --_text-state-color: var(--_text-active-color);
+    --_text-state-shadow: var(--_text-active-shadow);
+    --_outline-state-size: var(--_outline-active-size);
+    --_outline-state-style: var(--_outline-active-style);
+    --_outline-state-color: var(--_outline-active-color);
+    --_outline-state-offset: var(--_outline-active-offset);
+  }
+
+  [class*="fantasy-btn"]::after {
+    --_border-base-opacity: var(--border-opacity, 1);
+    --_border-hover-opacity: var(--border-hover-opacity,
+      var(--_border-base-opacity)
+    );
+    --_border-focus-opacity: var(--border-focus-opacity,
+      var(--_border-hover-opacity)
+    );
+    --_border-active-opacity: var(--border-active-opacity,
+      var(--_border-focus-opacity)
+    );
+    --_border-state-opacity: var(--_border-base-opacity);
+
+    --_border-base-bg: var(--border-bg, currentColor);
+    --_border-hover-bg: var(--border-hover-bg, var(--_border-base-bg));
+    --_border-focus-bg: var(--border-focus-bg, var(--_border-hover-bg));
+    --_border-active-bg: var(--border-active-bg, var(--_border-focus-bg));
+
+    --_border-state-bg: var(--_border-base-bg);
+  }
+  [class*="fantasy-btn"]:hover::after {
+    --_border-state-opacity: var(--_border-hover-opacity);
+    --_border-state-bg: var(--_border-hover-bg);
+  }
+  [class*="fantasy-btn"]:focus::after {
+    --_border-state-opacity: var(--_border-focus-opacity);
+    --_border-state-bg: var(--_border-focus-bg);
+  }
+  [class*="fantasy-btn"]:active::after {
+    --_border-state-opacity: var(--_border-active-opacity);
+    --_border-state-bg: var(--_border-active-bg);
+  }
+
+  [class*="fantasy-btn"]::before {
+    --_inlay-base-opacity: var(--inlay-opacity, 1);
+    --_inlay-hover-opacity: var(--inlay-hover-opacity,
+      var(--_inlay-base-opacity)
+    );
+    --_inlay-focus-opacity: var(--inlay-focus-opacity,
+      var(--_inlay-hover-opacity)
+    );
+    --_inlay-active-opacity: var(--inlay-active-opacity,
+      var(--_inlay-focus-opacity)
+    );
+    --_inlay-state-opacity: var(--_inlay-base-opacity);
+
+    --_inlay-base-bg: var(--inlay-bg, #8888);
+    --_inlay-hover-bg: var(--inlay-hover-bg, var(--_inlay-base-bg));
+    --_inlay-focus-bg: var(--inlay-focus-bg, var(--_inlay-hover-bg));
+    --_inlay-active-bg: var(--inlay-active-bg, var(--_inlay-focus-bg));
+
+    --_inlay-state-bg: var(--_inlay-base-bg);
+  }
+  [class*="fantasy-btn"]:hover::before {
+    --_inlay-state-opacity: var(--_inlay-hover-opacity);
+    --_inlay-state-bg: var(--_inlay-hover-bg);
+  }
+  [class*="fantasy-btn"]:focus::before {
+    --_inlay-state-opacity: var(--_inlay-focus-opacity);
+    --_inlay-state-bg: var(--_inlay-focus-bg);
+  }
+  [class*="fantasy-btn"]:active::before {
+    --_inlay-state-opacity: var(--_inlay-active-opacity);
+    --_inlay-state-bg: var(--_inlay-active-bg);
+  }
+
+  [class*="fantasy-btn"]::before,
+  [class*="fantasy-btn"]::after {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  [class*="fantasy-btn"]::before {
+    background: var(--_inlay-state-bg);
+    opacity: var(--_inlay-state-opacity);
+    clip-path: polygon(
+      calc(50px * var(--s)) calc(82px * var(--s)),
+      calc(114px * var(--s)) calc(18px * var(--s)),
+      calc(100% - 114px * var(--s)) calc(18px * var(--s)),
+      calc(100% - 50px * var(--s)) calc(82px * var(--s)),
+      calc(100% - 50px * var(--s)) calc(100% - 82px * var(--s)),
+      calc(100% - 114px * var(--s)) calc(100% - 18px * var(--s)),
+      calc(114px * var(--s)) calc(100% - 18px * var(--s)),
+      calc(50px * var(--s)) calc(100% - 82px * var(--s))
+    );
+  }
+
+  [class*="fantasy-btn"]::after {
+    background: var(--_border-state-bg);
+    opacity: var(--_border-state-opacity);
+    clip-path: polygon(
+      /* home */
+      calc(37px * var(--s)) calc(44px * var(--s)),
+      /* jump union point */
+      calc(52px * var(--s)) calc(29px * var(--s)),
+      calc(61px * var(--s)) calc(18px * var(--s)),
+      calc(82.5px * var(--s)) calc(39.5px * var(--s)),
+      calc(61px * var(--s)) calc(61px * var(--s)),
+      0px 0px,
+      calc(77px * var(--s)) 0px,
+      calc(90px * var(--s)) calc(13px * var(--s)),
+      calc(103px * var(--s)) 0px,
+
+      calc(100% - 103px * var(--s)) 0px,
+      calc(100% - 90px * var(--s)) calc(13px * var(--s)),
+      calc(100% - 77px * var(--s)) 0px,
+      100% 0px,
+      calc(100% - 61px * var(--s)) calc(61px * var(--s)),
+      calc(100% - 82.5px * var(--s)) calc(39.5px * var(--s)),
+      calc(100% - 61px * var(--s)) calc(18px * var(--s)),
+
+      /*... -x union point, jump ...*/
+      calc(100% - 52px * var(--s)) calc(29px * var(--s)),
+      calc(100% - 37px * var(--s)) calc(44px * var(--s)),
+
+      calc(100% - 24.5px * var(--s)) calc(56.5px * var(--s)),
+      calc(100% - 32.5px * var(--s)) calc(64.5px * var(--s)),
+
+      calc(100% - 32.5px * var(--s)) calc(100% - 64.5px * var(--s)),
+      calc(100% - 24.5px * var(--s)) calc(100% - 56.5px * var(--s)),
+
+      calc(100% - 37px * var(--s)) calc(100% - 44px * var(--s)),
+      calc(100% - 52px * var(--s)) calc(100% - 29px * var(--s)),
+
+      calc(100% - 61px * var(--s)) calc(100% - 18px * var(--s)),
+      calc(100% - 82.5px * var(--s)) calc(100% - 39.5px * var(--s)),
+      calc(100% - 61px * var(--s)) calc(100% - 61px * var(--s)),
+      100% 100%,
+
+      calc(100% - 77px * var(--s)) 100%,
+      calc(100% - 90px * var(--s)) calc(100% - 13px * var(--s)),
+      calc(100% - 103px * var(--s)) 100%,
+
+      calc(103px * var(--s)) 100%,
+      calc(90px * var(--s)) calc(100% - 13px * var(--s)),
+      calc(77px * var(--s)) 100%,
+
+      0px 100%,
+      calc(61px * var(--s)) calc(100% - 61px * var(--s)),
+      calc(82.5px * var(--s)) calc(100% - 39.5px * var(--s)),
+      calc(61px * var(--s)) calc(100% - 18px * var(--s)),
+
+      calc(52px * var(--s)) calc(100% - 29px * var(--s)),
+      calc(37px * var(--s)) calc(100% - 44px * var(--s)),
+
+      calc(24.5px * var(--s)) calc(100% - 56.5px * var(--s)),
+      calc(32.5px * var(--s)) calc(100% - 64.5px * var(--s)),
+
+      calc(32.5px * var(--s)) calc(64.5px * var(--s)),
+      calc(24.5px * var(--s)) calc(56.5px * var(--s)),
+
+      /* first point in the path, time to CCW inner path */
+      calc(37px * var(--s)) calc(44px * var(--s)),
+      /* w = ~8 */
+      calc(45px * var(--s)) calc(52px * var(--s)),
+      calc(41px * var(--s)) calc(56px * var(--s)),
+      calc(50px * var(--s)) calc(66px * var(--s)),
+      calc(40.5px * var(--s)) calc(75.5px * var(--s)),
+
+      calc(40.5px * var(--s)) calc(100% - 75.5px * var(--s)),
+      calc(50px * var(--s)) calc(100% - 66px * var(--s)),
+      calc(41px * var(--s)) calc(100% - 56px * var(--s)),
+      calc(45px * var(--s)) calc(100% - 52px * var(--s)),
+
+      calc(37px * var(--s)) calc(100% - 44px * var(--s)),
+
+      calc(52px * var(--s)) calc(100% - 29px * var(--s)),
+      calc(59.5px * var(--s)) calc(100% - 36.5px * var(--s)),
+      calc(61px * var(--s)) calc(100% - 35px * var(--s)),
+      calc(65.5px * var(--s)) calc(100% - 39.5px * var(--s)),
+      calc(61px * var(--s)) calc(100% - 44px * var(--s)),
+      calc(25px * var(--s)) calc(100% - 8px * var(--s)),
+      calc(72.5px * var(--s)) calc(100% - 8px * var(--s)),
+      calc(90px * var(--s)) calc(100% - 25.5px * var(--s)),
+      calc(107.5px * var(--s)) calc(100% - 8px * var(--s)),
+
+      calc(100% - 107.5px * var(--s)) calc(100% - 8px * var(--s)),
+      calc(100% - 90px * var(--s)) calc(100% - 25.5px * var(--s)),
+      calc(100% - 72.5px * var(--s)) calc(100% - 8px * var(--s)),
+      calc(100% - 25px * var(--s)) calc(100% - 8px * var(--s)),
+      calc(100% - 61px * var(--s)) calc(100% - 44px * var(--s)),
+      calc(100% - 65.5px * var(--s)) calc(100% - 39.5px * var(--s)),
+      calc(100% - 61px * var(--s)) calc(100% - 35px * var(--s)),
+      calc(100% - 59.5px * var(--s)) calc(100% - 36.5px * var(--s)),
+      calc(100% - 52px * var(--s)) calc(100% - 29px * var(--s)),
+
+      calc(100% - 37px * var(--s)) calc(100% - 44px * var(--s)),
+
+      calc(100% - 45px * var(--s)) calc(100% - 52px * var(--s)),
+      calc(100% - 41px * var(--s)) calc(100% - 56px * var(--s)),
+      calc(100% - 50px * var(--s)) calc(100% - 66px * var(--s)),
+      calc(100% - 40.5px * var(--s)) calc(100% - 75.5px * var(--s)),
+
+      calc(100% - 40.5px * var(--s)) calc(75.5px * var(--s)),
+      calc(100% - 50px * var(--s)) calc(66px * var(--s)),
+      calc(100% - 41px * var(--s)) calc(56px * var(--s)),
+      calc(100% - 45px * var(--s)) calc(52px * var(--s)),
+
+      calc(100% - 37px * var(--s)) calc(44px * var(--s)),
+
+      calc(100% - 52px * var(--s)) calc(29px * var(--s)),
+      calc(100% - 59.5px * var(--s)) calc(36.5px * var(--s)),
+      calc(100% - 61px * var(--s)) calc(35px * var(--s)),
+      calc(100% - 65.5px * var(--s)) calc(39.5px * var(--s)),
+      calc(100% - 61px * var(--s)) calc(44px * var(--s)),
+      calc(100% - 25px * var(--s)) calc(8px * var(--s)),
+      calc(100% - 72.5px * var(--s)) calc(8px * var(--s)),
+      calc(100% - 90px * var(--s)) calc(25.5px * var(--s)),
+      calc(100% - 107.5px * var(--s)) calc(8px * var(--s)),
+
+      calc(107.5px * var(--s)) calc(8px * var(--s)),
+      calc(90px * var(--s)) calc(25.5px * var(--s)),
+      calc(72.5px * var(--s)) calc(8px * var(--s)),
+      calc(25px * var(--s)) calc(8px * var(--s)),
+      calc(61px * var(--s)) calc(44px * var(--s)),
+      calc(65.5px * var(--s)) calc(39.5px * var(--s)),
+      calc(61px * var(--s)) calc(35px * var(--s)),
+      calc(59.5px * var(--s)) calc(36.5px * var(--s)),
+      /* union point */
+      calc(52px * var(--s)) calc(29px * var(--s)),
+      /* jump home */
+      calc(37px * var(--s)) calc(44px * var(--s))
+    );
+  }
+}
+
+
+.tabs .item.active {
+  text-shadow: 0 0 10px #d8d2f8;
+}
+
+textarea:focus{
+  box-shadow: 0 0 6px #d8d2f8;
+}
+textarea{
+  color: #d8d2f8;
+}
+
+#chat-form textarea{
+  background: url("../assets/wallpaper.jpg")  no-repeat; 
+  background-size:150%;
+  background-position:right;
+  transition: all 0.5s ease;
+}
+
+#chat-form textarea:hover{
+  filter: grayscale(60%);
+  color:white;
+}
+
+.sheet.journal-entry .journal-entry-content {
+  background: url("../assets/sheet.jpeg")  no-repeat;
+  background-position: center top;
+    background-size: 100% auto;
+  color:black;
+
+}
+
+.sheet.journal-entry .journal-entry-pages {
+  backdrop-filter: blur(2px) sepia(50%);
+
+}
+.journal-page-content {
+  padding:25px;
+  border-radius: 25px;
+}
+
+.form-group input, .form-group select, .title, .notes{
+  color: #d8d2f8 !important;
+}
+
+.form-group .hint, .form{
+  color: #858393 !important;
+}
+
+.success {
+  color: green;
+}
+
+.failure {
+  color: red;
+}
+
+.critical{
+  color:rgb(139, 128, 0);
+  text-decoration: underline;
+}
+.chat-message{
+
+  border-color: lightgray !important;
+}
+
+.message-sender{
+  color:black;
+}
+
+.paper-doll{
+  max-width: 400px !important;
+}
+
+option {
+  background: rgb(255, 255, 255) !important;
+  color:black;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="time"]:focus, input[type="search"]:focus {
+  box-shadow: 0 0 5px #d8d2f89d;
+  border: 1px solid #d8d2f866;
+}
+
+input[type="text"]:disabled, input[type="number"]:disabled, input[type="password"]:disabled, input[type="date"]:disabled, input[type="time"]:disabled, input[type="search"]:disabled {
+  margin-top: 2px;
+  border-right: 1px solid #d8d2f866;
+}
+
+input[type="number"]{
+  width: 2vh;
+}
+.ability .flexrow .flex-group-right label {
+  margin-top:2px
+}
+
+#token-health-input{
+  width: 40px !important;
+  font-size: 1em;
+}

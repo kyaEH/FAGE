@@ -1,0 +1,91 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+      <div class="grid grid-2col">
+        <div class="resource">
+          <label class="resource-label">Quantity</label>
+          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number" />
+        </div>
+        <div class="resource">
+          <label class="resource-label">Weight</label>
+          <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="equipement">Equipement</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the
+      rollData prop. --}}
+      {{editor system.description target="system.description" rollData=rollData button=true owner=owner
+      editable=editable}}
+    </div>
+    
+    <div class="tab" data-group="primary" data-tab="equipement">
+      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the
+      rollData prop. --}}
+      <input type="checkbox" name="system.equipement.isEquipement" {{checked system.equipement.isEquipement}}> Equipable?
+      {{#if system.equipement.isEquipement}}
+      <div>
+        <h3>Stats</h3>
+      
+      Stat <select name="system.equipement.stat" style="color:white">
+      {{#select system.equipement.stat}}>
+        <option  value="degats">Degats</option>
+        <option  value="parade">Parade</option>
+        <option  value="magie">Magie</option>
+        <option  value="rapidite">Rapidite</option>
+        <option  value="charisme">Charisme</option>
+        <option  value="precision">Precision</option>
+        <option  value="rm">Résistance magique</option>
+        <option  value="maxQuantity">Quantité max (sac)</option>
+        {{/select}}
+      </select><br>
+      Valeur <input type="text" style="width:50px" name="system.equipement.value" value="{{system.equipement.value}}">
+      <h3>Script</h3>
+      ⚠️ NE PAS TOUCHER SANS PASTEL, PEUT CASSER VOTRE FICHE ⚠️
+      <textarea name="system.equipement.script">{{system.equipement.script}}</textarea>
+      {{/if}}
+      </div>
+    </div>
+    
+
+    {{!-- Attributes Tab --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      {{!-- As you add new fields, add them in here! --}}
+      <div class="resource">
+        <label class="resource-label">Roll Formula:</label>
+        <span>{{system.formula}}</span>
+        <div class="grid grid-4col">
+          <div class="grid-span-1">
+            <label class="resource-label">Number of Dice</label>
+            <input type="text" name="system.roll.diceNum" value="{{system.roll.diceNum}}" data-dtype="Number" />
+          </div>
+          <div class="grid-span-1">
+            <label class="resource-label">Die Size</label>
+            <input type="text" name="system.roll.diceSize" value="{{system.roll.diceSize}}" data-dtype="String" />
+          </div>
+          <div class="grid-span-2">
+            <label class="resource-label">Roll Modifier</label>
+            <input type="text" name="system.roll.diceBonus" value="{{system.roll.diceBonus}}" data-dtype="String" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</form>
+
+{{log system}}

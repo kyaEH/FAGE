@@ -1,0 +1,24 @@
+<div class="ability" style="flex:0.2">
+  <label class="resource-label rollable align-center" id="dégâts_roll" data-roll="d20" data-label="dégâts">Dégâts 🎲</label>
+  <input type="text" class="resource-label align-left" name="system.statSecondaire.dégâts.value" value="{{system.statSecondaire.dégâts.value}}" id="dégâts" data-dtype="Number"/>
+</div>
+
+<div class="ability" style="flex:0.2">
+  <label class="resource-label rollable align-center" id="rapidité_roll" data-roll="d20" data-label="rapidité">Rapidité 🎲</label>
+  <input type="text" class="resource-label align-left" name="system.statSecondaire.rapidite.value" value="{{system.statSecondaire.rapidite.value}}" id="rapidité" data-dtype="Number"/>
+</div>
+<div class="ability" style="flex:0.2">
+  <label class="resource-label align-center" id="paradeNPCLabel" data-roll="d20" data-label="parade">Parade</label>
+  <input type="text" class="resource-label align-left" name="system.statSecondaire.parade.value" value="{{system.statSecondaire.parade.value}}" id="paradeNPC" data-dtype="Number"/>
+</div>
+<div class="ability" style="flex:0.2">
+  <label class="resource-label align-center" id="paradeNPCLabel"  data-label="Résistance magique">Résistance magique</label>
+  <input type="text" class="resource-label align-left" name="system.statSecondaire.RM.value" value="{{system.statSecondaire.RM.value}}" id="RMNPC" data-dtype="Number"/>
+</div>
+<script>
+
+  dmgRoll =`${$("#dégâts").val()} + d${$("#dégâts").val()/2} - d${$("#dégâts").val()/2} `;
+  $("#dégâts_roll").attr("data-roll", dmgRoll);
+  initiative =`${$("#rapidité").val()} + d${$("#rapidité").val()/2} - d${$("#rapidité").val()/2} `;
+  $("#rapidité_roll").attr("data-roll", initiative);
+</script>
