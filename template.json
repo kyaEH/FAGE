@@ -114,6 +114,9 @@
         },
         "maxQuantity" : {
           "value" : 18
+        },
+        "remainingPoints" : {
+          "value" : 0
         }
       }
     },

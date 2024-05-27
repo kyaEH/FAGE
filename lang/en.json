@@ -1,12 +1,12 @@
 {
   "BOILERPLATE": {
     "Ability": {
-      "Str": { "long": "Force", "abbr": "str" },
+      "Str": { "long": "Strength", "abbr": "str" },
       "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterité", "abbr": "dex" },
+      "Dex": { "long": "Dexterity", "abbr": "dex" },
       "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Concentration", "abbr": "wis" },
-      "Cha": { "long": "Agilité", "abbr": "cha" }
+      "Wis": { "long": "Wisdom", "abbr": "wis" },
+      "Cha": { "long": "Charisma", "abbr": "cha" }
     },
     "SheetLabels": {
       "Actor": "Boilerplate Actor Sheet",
@@ -14,16 +14,16 @@
     },
     "Item": {
       "Spell": {
-        "SpellLVL": "Compétence Niveau {level}",
-        "AddLVL": "Comp. NV.{level}"
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
       }
     },
     "Effect": {
       "Source": "Source",
-      "Toggle": "Activer / désactiver l'effet",
-      "Temporary": "Effets temporaires",
-      "Passive": "Effets passifs",
-      "Inactive": "Effets inactifs (inventaire d'effet)"
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
     }
   },
 
@@ -33,9 +33,9 @@
       "npc": "NPC"
     },
     "Item": {
-      "item": "Objet",
-      "feature": "Option",
-      "spell": "Compétence"
+      "item": "Item",
+      "feature": "Feature",
+      "spell": "Spell"
     }
   }
 }

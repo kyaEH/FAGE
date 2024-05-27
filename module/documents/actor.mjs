@@ -166,10 +166,10 @@ prepareDerivedData() {
     
     var Force = actorData.system.abilities.str.value;
     var Constitution = actorData.system.abilities.con.value;
-    var Agilité = actorData.system.abilities.dex.value;
+    var Agilité = actorData.system.abilities.cha.value;
     var Intelligence = actorData.system.abilities.int.value;
     var Concentration = actorData.system.abilities.wis.value;
-    var Dextérité = actorData.system.abilities.cha.value;
+    var Dextérité = actorData.system.abilities.dex.value;
     // precision = agilité/2.75 + dexterité/2
     actorData.system.statSecondaire.precision.value = Math.min(18, 9 + Math.round(Agilité / 3 + Dextérité / 2 + precision_bonus));
     //dégats = force + arme1 + arme2
@@ -187,7 +187,7 @@ prepareDerivedData() {
     actorData.system.statSecondaire.esquive.value = Math.max(10,Math.min(75, Math.round(Agilité + 90 - (Number(actorData.system.attributes.age.value) / 2 + Number(actorData.system.attributes.taille.value) / 10 + Number(actorData.system.attributes.poids.value) / 5))));
     // --- Social ---
         //rapidite = agilite * 1.5 + intelligence * 1.5 + bottes
-    actorData.system.statSecondaire.rapidite.value = Math.floor(5+Agilité*1.5+Concentration*0.75 + rapidite_bonus + (10-Number(actorData.system.attributes.taille.value)/20));
+    actorData.system.statSecondaire.rapidite.value = Math.floor(6+Agilité*1.5+Concentration*0.75 + rapidite_bonus + (10-Number(actorData.system.attributes.taille.value)/20));
     //furtivite = agilite/2 + concentration/3 + 10-taille/10
     actorData.system.statSecondaire.furtivite.value = Math.min(17,Math.max(4,Math.round(3+Math.floor(Agilité/2 + Concentration/2.5))));
     //perception= intelligence / 2 + concentration / 2
@@ -199,6 +199,14 @@ prepareDerivedData() {
     actorData.system.health.max = Math.floor(10+Force*1.25+ Constitution*2 + Number(actorData.system.attributes.poids.value) / 15 + Number(actorData.system.attributes.level.value));
     //charisme = constitution/2 + intelligence/1.5 + charme
     actorData.system.statSecondaire.charisme.value = Math.min(17, 5+Math.floor(Constitution/1.75+Intelligence/1.75+charisme_bonus+Number(actorData.system.attributes.taille.value) / 75));
+    if (!game.modules.get("fvtt-paper-doll-ui")?.active) {
+      actorData.system.statSecondaire.maxQuantity.value = 18 + Force/2 + Constitution/2;
+    }else{
+      actorData.system.statSecondaire.maxQuantity.value = quantityMax;
+    }
+    // remainingPoints
+    actorData.system.statSecondaire.remainingPoints.value = 16 + actorData.system.attributes.level.value - ( Force + Constitution + Agilité + Intelligence + Concentration + Dextérité);
+    
     
   }
     // Make separate methods for each Actor type (character, npc, etc.) to keep
@@ -278,5 +286,60 @@ prepareDerivedData() {
     // Process additional NPC data here.
   }
   //on token update
+  async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
+    const attr = foundry.utils.getProperty(this.system, attribute);
+    const current = isBar ? attr.value : attr;
+    const update = isDelta ? current + value : value;
+    if ( update === current ) return this;
+    // name of the actor
+    var name = this.name;
+    // Determine the updates to make to the actor data
+    let updates;
+    if ( isBar ) {
+      var delta = update - current;
+      updates = {[`system.${attribute}.value`]: Math.clamp(update, 0, attr.max)}
+      if(attribute === "health"){
+        if(delta < 0){
+          var flavor = "Dégâts subit";
+          var content = name+" a subit "+Math.sqrt(delta*delta)+" dégâts";
+          var content2 = name+" a subit des dégâts";
+        }
+        if(delta > 0){
+          var flavor = "Soin";
+          var content = name+" s'est soigné de "+delta+" points de vie";
+          var content2 =  name+" s'est soigné";
+        }
+      }
+      if(attribute === "power"){
+        if(delta > 0){
+          var flavor = "Mana récupéré";
+          var content = name+" a récupéré "+delta+" points de mana"
+          var content2 =  name+" a récupéré du mana"
+        }
+        if(delta < 0){
+          var flavor = "Mana dépensé";
+          var content = name+" a dépensé "+Math.sqrt(delta*delta)+" points de mana"
+          var content2 = name+" a dépensé du mana"
+        }
+      }
+      var speaker = ChatMessage.getSpeaker({actor: this, token: this.token});
+      ChatMessage.create({
+        whisper: ChatMessage.getWhisperRecipients("GM"),
+        speaker: speaker,
+        flavor: flavor,
+        content: content,
+      });
+      ChatMessage.create({
+        speaker: speaker,
+        flavor: flavor,
+        content: content2,
+      });
+    }
+    else updates = {[`system.${attribute}`]: update};
+
+    // Allow a hook to override these changes
+    const allowed = Hooks.call("modifyTokenAttribute", {attribute, value, isDelta, isBar}, updates);
+    return allowed !== false ? this.update(updates) : this;
+  }
   
 }

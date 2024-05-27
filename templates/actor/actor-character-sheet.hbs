@@ -20,9 +20,9 @@
         <div class="resource flex-group-center">
           <label for="system.health.value" class="resource-label">PV</label>
           <div class="resource-content flexrow flex-right">
-          <input type="text" name="system.health.value" name="pvact" value="{{system.health.value}}" data-dtype="Number"/>
+          <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
           <span> / </span>
-          <input type="text" name="system.health.max" name="pvmax" value="{{system.health.max}}" data-dtype="Number"/>
+          <input type="text" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
           </div>
           
         </div>
@@ -109,7 +109,7 @@
               {{/each}}
               <div class="ability flexrow flex-group-right">
               <label class="resource-label flexlarge align-left">Points restants</label>
-              <input type="text" id="remaining" disabled>
+              <input type="text" name="system.statSecondaire.remainingPoints.value" id="remaining" value="{{system.statSecondaire.remainingPoints.value}}" disabled>
               </div>
               <h3>Talents</h3>
               <div class="ability flexrow flex-group-left">

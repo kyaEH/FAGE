@@ -8,6 +8,7 @@ import { BoilerplateItemSheet } from './sheets/item-sheet.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { BOILERPLATE } from './helpers/config.mjs';
 
+
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -15,6 +16,7 @@ import { BOILERPLATE } from './helpers/config.mjs';
 Hooks.once('init', function () {
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
+
   game.boilerplate = {
     BoilerplateActor,
     BoilerplateItem,
@@ -54,13 +56,19 @@ Hooks.once('init', function () {
     makeDefault: true,
     label: 'BOILERPLATE.SheetLabels.Item',
   });
+  //systems\fage\assets\canalisation2.png
   CONFIG.statusEffects =
   [
     {
         "id": "canalisation",
         "name": "Canalisation",
-        "icon": "icons/svg/canalisation2.png"
-    }
+        "icon": "systems/fage/assets/canalisation2.png"
+    },
+    {
+      "id": "bouclier",
+      "name": "Bouclier",
+      "icon": "systems/fage/assets/shield.png"
+  },
 ];
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
@@ -131,7 +139,9 @@ Handlebars.registerHelper('getEquipedItems', function(actorID, itemID) {
 
 Hooks.once('ready', function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+  
   Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
+  
 });
 
 /* -------------------------------------------- */
@@ -200,6 +210,7 @@ function rollItemMacro(itemUuid) {
   });
 }
 
+// Drag ruler hooks
 Hooks.once("dragRuler.ready", (SpeedProvider) => {
   class FictionalGameSystemSpeedProvider extends SpeedProvider {
       get colors() {
@@ -211,21 +222,24 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
       }
 
       getRanges(token) {
-          const baseSpeed = Math.ceil(token.actor.system.statSecondaire.rapidite.value/5)*5
+        // round to five upper token.actor.system.statSecondaire.rapidite.value
+          const baseSpeed = Math.ceil(token.actor.system.statSecondaire.rapidite.value/5)*5;
 
     // A character can always walk it's base speed and dash twice it's base speed
     const ranges = [
       {range: baseSpeed, color: "walk"},
-      {range: baseSpeed * 1.5, color: "run"}
+      {range: baseSpeed * 1.5, color: "dash"}
     ]
 
     // Characters that aren't wearing armor are allowed to run with three times their speed
-          
+
+
           return ranges
       }
   }
+
   dragRuler.registerSystem("fage", FictionalGameSystemSpeedProvider)
-});
+})
 
 socket.on("updateTo", (request, ack) => {
   console.log(request);
@@ -233,6 +247,3 @@ socket.on("updateTo", (request, ack) => {
 
 
 //Hooks on token update health, console log the before and after token health
-Hooks.on("updateToken", (sceneId, token, options) => {
-  console.log(token);
-});

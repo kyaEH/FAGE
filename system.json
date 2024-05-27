@@ -37,9 +37,13 @@
   "languages": [
     {
       "lang": "en",
-      "name": "French",
+      "name": "English",
       "path": "lang/en.json"
-    }
+    },
+    {
+      "lang": "fr",
+      "name": "French",
+      "path": "lang/fr.json"}
   ],
   "packs": [],
   "packFolders": [],
@@ -49,7 +53,7 @@
   "background": "systems/fage/assets/wallpaper.jpg",
   "grid": {
     "distance":5,
-    "units":"ft"
+    "units":"dm"
   },
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power"

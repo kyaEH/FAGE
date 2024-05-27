@@ -5,7 +5,9 @@
   font-family: "Roboto", sans-serif;
   
 }
-
+*{
+  scrollbar-color: #0096a7 var(--color-scrollbar-track);
+}
 .rollable:hover, .rollable:focus {
   color: #fff;
   text-shadow: 0 0 10px rgb(255, 255, 255);
@@ -795,10 +797,25 @@ textarea{
   text-decoration: underline;
 }
 .chat-message{
-
+  background: url(../assets/chatmessage-modified2.png) no-repeat center;
   border-color: lightgray !important;
+  color:rgb(201, 252, 255) !important;
 }
-
+.chat-message.whisper{
+  background: url(../assets/chatmessage-modified2.png) no-repeat center;
+  filter:grayscale(50%);
+  border-color: lightgray !important;
+  color:rgb(201, 252, 255) !important;
+}
+.whisper-to{
+  color:rgb(251, 169, 169) !important;
+}
+#chat-log .message.round-marker{
+  border-bottom: 1px solid #00fff7 !important;
+}
+.chat-portrait-text-size-name-generic, .message-metadata{
+  color:rgb(201, 252, 255) !important;
+}
 .message-sender{
   color:black;
 }
