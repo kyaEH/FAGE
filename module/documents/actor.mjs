@@ -4,12 +4,16 @@
  */
 
 function htmlDecode(input) {
-	var doc = new DOMParser().parseFromString(input, "text/html");
+	let doc = new DOMParser().parseFromString(input, "text/html");
 	return doc.documentElement.textContent;
   }
 export class BoilerplateActor extends Actor {
   /** @override */
+  //set default prototype token vision enabled, Actor#_preCreate should be used
 
+
+ 
+  
   prepareData() {
     // Prepare data for the actor. Calling the super version of this executes
     // the following, in order: data reset (to clear active effects),
@@ -44,14 +48,14 @@ prepareDerivedData() {
     //if actor is not npc
     if (actorData.type !== 'npc') {
     // if actorData.flags["fvtt-paper-doll-ui"].slots is not undefined 
-      var degats_bonus = 0;
-      var parade_bonus = 0;
-      var magie_bonus = 0;
-      var rapidite_bonus = 0;
-      var charisme_bonus = 0;
-      var precision_bonus = 0;
-      var rm_bonus = 0;
-      var quantityMax = 0;
+      let degats_bonus = 0;
+      let parade_bonus = 0;
+      let magie_bonus = 0;
+      let rapidite_bonus = 0;
+      let charisme_bonus = 0;
+      let precision_bonus = 0;
+      let rm_bonus = 0;
+      let quantityMax = 0;
       actorData.system.attributes.level.value = Math.floor(Math.max(1, Math.sqrt(Number(actorData.system.attributes.experience.value) / 5)) - 1);
 
       if (actorData.flags?.["fvtt-paper-doll-ui"]?.slots) {
@@ -60,10 +64,10 @@ prepareDerivedData() {
           // if value[0] is not undefined
           if (value[0] != undefined || value[1] != undefined || value[2] != undefined || value[3] != undefined) {
             if(value[0] != undefined) {
-              var itemID = value[0].split(".")[3];
-              var item = actorData.items.get(itemID);
+              let itemID = value[0].split(".")[3];
+              let item = actorData.items.get(itemID);
               if(item.system.equipement.isEquipement){
-                var stat = item.system.equipement.stat;
+                let stat = item.system.equipement.stat;
     
                 if(stat == "degats"){
                   degats_bonus += Number(item.system.equipement.value);
@@ -101,10 +105,10 @@ prepareDerivedData() {
               }
             }
             if(value[1] != undefined) {
-              var itemID2 = value[1].split(".")[3];
-              var item2 = actorData.items.get(itemID2);
+              let itemID2 = value[1].split(".")[3];
+              let item2 = actorData.items.get(itemID2);
               if(item2.system.equipement.isEquipement){
-                var stat = item2.system.equipement.stat;
+                let stat = item2.system.equipement.stat;
     
                 if(stat == "degats"){
                   degats_bonus += Number(item2.system.equipement.value);
@@ -164,49 +168,65 @@ prepareDerivedData() {
     */ 
    
     
-    var Force = actorData.system.abilities.str.value;
-    var Constitution = actorData.system.abilities.con.value;
-    var Agilité = actorData.system.abilities.cha.value;
-    var Intelligence = actorData.system.abilities.int.value;
-    var Concentration = actorData.system.abilities.wis.value;
-    var Dextérité = actorData.system.abilities.dex.value;
-    // precision = agilité/2.75 + dexterité/2
-    actorData.system.statSecondaire.precision.value = Math.min(18, 9 + Math.round(Agilité / 3 + Dextérité / 2 + precision_bonus));
-    //dégats = force + arme1 + arme2
-    actorData.system.statSecondaire.degatphys.value = Math.round(Force*1 + degats_bonus);
-    //magie = intelligence/1.25 + concentration/2 + amulette
-    actorData.system.statSecondaire.magie.value = Math.round(Intelligence + Concentration / 2 + magie_bonus);
-    // critique = force/2 + agilité/2
-    actorData.system.statSecondaire.critique.value = Math.round(Force / 2 + Agilité / 2+Concentration*0.25);
-    //  buff&debuff = concentration/2 + dextérité/2
-    actorData.system.statSecondaire.buffdebuff.value = Math.min(17, 2+Math.round(Concentration / 2 + Dextérité / 2));
-    // parade = constitution/2.5 + armure
-    actorData.system.statSecondaire.parade.value = Math.round(Constitution / 3 + parade_bonus);
-    actorData.system.statSecondaire.RM.value = Math.round(Constitution / 4 + Intelligence / 3 + rm_bonus);
-    // esquive = agilité + age + taille + poids
-    actorData.system.statSecondaire.esquive.value = Math.max(10,Math.min(75, Math.round(Agilité + 90 - (Number(actorData.system.attributes.age.value) / 2 + Number(actorData.system.attributes.taille.value) / 10 + Number(actorData.system.attributes.poids.value) / 5))));
-    // --- Social ---
-        //rapidite = agilite * 1.5 + intelligence * 1.5 + bottes
-    actorData.system.statSecondaire.rapidite.value = Math.floor(6+Agilité*1.5+Concentration*0.75 + rapidite_bonus + (10-Number(actorData.system.attributes.taille.value)/20));
-    //furtivite = agilite/2 + concentration/3 + 10-taille/10
-    actorData.system.statSecondaire.furtivite.value = Math.min(17,Math.max(4,Math.round(3+Math.floor(Agilité/2 + Concentration/2.5))));
-    //perception= intelligence / 2 + concentration / 2
-    actorData.system.statSecondaire.perception.value = Math.min(17,Math.floor(8+Intelligence/2 + Concentration*0.75));
-    //mana= intelligence *1.25 + dexterite *0.75
+  const abilities = actorData.system.abilities;
+  const attributes = actorData.system.attributes;
+  const statSecondaire = actorData.system.statSecondaire;
+  
+  const {
+    str: { value: Force },
+    con: { value: Constitution },
+    cha: { value: Agilité },
+    int: { value: Intelligence },
+    wis: { value: Concentration },
+    dex: { value: Dextérité }
+  } = abilities;
+  
+  const { age, taille, poids, level } = attributes;
+  
+  const precision = Math.min(18, 9 + Math.round(Agilité / 3 + Dextérité / 2 + precision_bonus));
+  const degatphys = Math.round(Force * 1 + degats_bonus);
+  const magie = Math.round(Intelligence + Concentration / 2 + magie_bonus);
+  const critique = Math.round(Force / 2 + Agilité / 2 + Concentration * 0.25);
+  const buffdebuff = Math.min(17, 1 + Math.round(Concentration / 2 + Dextérité / 2 + Number(age.value)/20));
+  const parade = Math.round(Constitution / 3 + parade_bonus);
+  const RM = Math.round(Constitution / 4 + Intelligence / 3 + rm_bonus);
+  const esquive = Math.max(
+    10,
+    Math.min(
+      75,
+      Math.round(Agilité + 90 - (Number(age.value) / 2 + Number(taille.value) / 10 + Number(poids.value) / 5))
+    )
+  );
+  const rapidite = Math.floor(6 + Agilité * 1.75 + Concentration * 0.6 + rapidite_bonus + (10 - Number(taille.value) / 20));
+  const furtivite = Math.min(17, Math.max(4, Math.round(3 + Math.floor(Agilité / 2 + Concentration / 2.5))));
+  const perception = Math.min(17, Math.floor(8 + Intelligence / 2 + Concentration * 0.75));
+  const powerMax = Math.floor(2 + Intelligence * 1.25 + Dextérité * 0.75);
+  const healthMax = Math.floor(10 + Force * 1.25 + Constitution * 2 + Number(poids.value) / 15 + Number(level.value));
+  const charisme = Math.min(17, 5 + Math.floor(Constitution / 1.75 + Intelligence / 1.75 + charisme_bonus + Number(taille.value) / 75));
+  // Shield is just *2 hp
+  const shield = Math.floor(healthMax * 2);
 
-    actorData.system.power.max = Math.floor(2+Intelligence*1.25+Dextérité*0.75);
-    //pvmax= force * 1.5 + constition * 2
-    actorData.system.health.max = Math.floor(10+Force*1.25+ Constitution*2 + Number(actorData.system.attributes.poids.value) / 15 + Number(actorData.system.attributes.level.value));
-    //charisme = constitution/2 + intelligence/1.5 + charme
-    actorData.system.statSecondaire.charisme.value = Math.min(17, 5+Math.floor(Constitution/1.75+Intelligence/1.75+charisme_bonus+Number(actorData.system.attributes.taille.value) / 75));
-    if (!game.modules.get("fvtt-paper-doll-ui")?.active) {
-      actorData.system.statSecondaire.maxQuantity.value = 18 + Force/2 + Constitution/2;
-    }else{
-      actorData.system.statSecondaire.maxQuantity.value = quantityMax;
-    }
-    // remainingPoints
-    actorData.system.statSecondaire.remainingPoints.value = 16 + actorData.system.attributes.level.value - ( Force + Constitution + Agilité + Intelligence + Concentration + Dextérité);
-    
+  statSecondaire.precision.value = precision;
+  statSecondaire.degatphys.value = degatphys;
+  statSecondaire.magie.value = magie;
+  statSecondaire.critique.value = critique;
+  statSecondaire.buffdebuff.value = buffdebuff;
+  statSecondaire.parade.value = parade;
+  statSecondaire.RM.value = RM;
+  statSecondaire.esquive.value = esquive;
+  statSecondaire.rapidite.value = rapidite;
+  statSecondaire.furtivite.value = furtivite;
+  statSecondaire.perception.value = perception;
+  actorData.system.power.max = powerMax;
+  actorData.system.health.max = healthMax;
+  actorData.system.shield.max = shield;
+  statSecondaire.charisme.value = charisme;
+  
+  statSecondaire.maxQuantity.value = !game.modules.get("fvtt-paper-doll-ui")?.active
+    ? 18 + Force / 2 + Constitution / 2
+    : quantityMax;
+  
+  statSecondaire.remainingPoints.value = 16 + Number(level.value) - (Force + Constitution + Agilité + Intelligence + Concentration + Dextérité);
     
   }
     // Make separate methods for each Actor type (character, npc, etc.) to keep
@@ -291,38 +311,120 @@ prepareDerivedData() {
     const current = isBar ? attr.value : attr;
     const update = isDelta ? current + value : value;
     if ( update === current ) return this;
+    let rpgtoken;
+    if(this.type === "npc") {
+      rpgtoken = this.token.object
+    }else {
+      rpgtoken = canvas.tokens.controlled[0];
+    }
     // name of the actor
-    var name = this.name;
+    let name = this.name;
     // Determine the updates to make to the actor data
     let updates;
+    let flavor, content, content2;
+    console.log(attribute, value, isDelta, isBar);
     if ( isBar ) {
-      var delta = update - current;
+      
+      let delta = update - current;
       updates = {[`system.${attribute}.value`]: Math.clamp(update, 0, attr.max)}
       if(attribute === "health"){
         if(delta < 0){
-          var flavor = "Dégâts subit";
-          var content = name+" a subit "+Math.sqrt(delta*delta)+" dégâts";
-          var content2 = name+" a subit des dégâts";
+          flavor = "Dégâts subis";
+          content = name+" a subi "+Math.sqrt(delta*delta)+" dégâts";
+          content2 = name+" a subi des dégâts";
+          //new DamageNumber(token,"green",false,false,false,false,"test")
+          // if npc
+          if(this.type === "npc"){
+            // createScrollingText(origin: Point, content: string, [options]?: { duration: number; distance: number; anchor: TEXT_ANCHOR_POINTS; direction: TEXT_ANCHOR_POINTS; jitter: number; textStyle: any }): Promise<PreciseText>
+            canvas.interface.createScrollingText(rpgtoken, "???", {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "red", fontSize: 100});
+            // just try to display a basic
+          }
+          else{
+            canvas.interface.createScrollingText(rpgtoken, delta, {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "red", fontSize: 100});
+          }
+          if(update <= 0){
+            flavor = "Défaite";
+            content = name+" a été vaincu";
+            content2 = name+" a été vaincu";
+            this.toggleStatusEffect("dead", {overlay: true, active: true});
+            
+          }
         }
         if(delta > 0){
-          var flavor = "Soin";
-          var content = name+" s'est soigné de "+delta+" points de vie";
-          var content2 =  name+" s'est soigné";
+          flavor = "Soin";
+          content = name+" s'est soigné de "+delta+" points de vie";
+          content2 =  name+" s'est soigné";
+          if(this.type === "npc"){
+            canvas.interface.createScrollingText(rpgtoken, "???", {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "green", fontSize: 100});
+ 
+          }
+          else{
+            canvas.interface.createScrollingText(rpgtoken, delta, {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "green", fontSize: 100});
+
+          }
         }
       }
       if(attribute === "power"){
         if(delta > 0){
-          var flavor = "Mana récupéré";
-          var content = name+" a récupéré "+delta+" points de mana"
-          var content2 =  name+" a récupéré du mana"
+          flavor = "Mana récupéré";
+          content = name+" a récupéré "+delta+" points de mana";
+          content2 =  name+" a récupéré du mana";
+          if(this.type === "npc"){
+            canvas.interface.createScrollingText(rpgtoken, "???", {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "blue", fontSize: 100});
+
+          }else{
+            canvas.interface.createScrollingText(rpgtoken, delta, {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "blue", fontSize: 100});
+
+          }
+
         }
         if(delta < 0){
-          var flavor = "Mana dépensé";
-          var content = name+" a dépensé "+Math.sqrt(delta*delta)+" points de mana"
-          var content2 = name+" a dépensé du mana"
+          flavor = "Mana dépensé";
+          content = name+" a dépensé "+Math.sqrt(delta*delta)+" points de mana";
+          content2 = name+" a dépensé du mana";
+          if(this.type === "npc"){
+            canvas.interface.createScrollingText(rpgtoken, "???", {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "purple", fontSize: 100});
+
+          }
+          else{
+            canvas.interface.createScrollingText(rpgtoken, delta, {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "purple", fontSize: 100});
+
+          }
         }
       }
-      var speaker = ChatMessage.getSpeaker({actor: this, token: this.token});
+      // Shield
+      if(attribute === "shield"){
+        
+        if(delta > 0){
+          flavor = "Bouclier récupéré";
+          content = name+" a récupéré "+delta+" points de bouclier";
+          content2 =  name+" a récupéré du bouclier";
+          if(this.type === "npc"){
+            canvas.interface.createScrollingText(rpgtoken, "???", {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "cyan", fontSize: 100});
+
+          }
+          else{
+            canvas.interface.createScrollingText(rpgtoken, delta, {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "cyan", fontSize: 100});
+
+          }
+
+        }
+        if(delta < 0){
+          flavor = "Bouclier dépensé";
+          content = name+" a dépensé "+Math.sqrt(delta*delta)+" points de bouclier";
+          content2 = name+" a dépensé du bouclier";
+          if(this.type === "npc"){
+            canvas.interface.createScrollingText(rpgtoken, "???", {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "grey", fontSize: 100});
+
+          }
+          else{
+            canvas.interface.createScrollingText(rpgtoken, delta, {duration: 1000, distance: 100, anchor: 0, direction: 0, jitter: 0, fill: "grey", fontSize: 100});
+
+          }
+        }
+      }
+      
+      const speaker = ChatMessage.getSpeaker({actor: this, token: this.token});
       ChatMessage.create({
         whisper: ChatMessage.getWhisperRecipients("GM"),
         speaker: speaker,

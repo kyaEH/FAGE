@@ -77,6 +77,7 @@ export class BoilerplateActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
+  
   _prepareCharacterData(context) {
     // Handle ability scores.
     for (let [k, v] of Object.entries(context.system.abilities)) {
@@ -133,6 +134,8 @@ export class BoilerplateActorSheet extends ActorSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
+    //on spell drag and drop 
+
 
     // Render the item sheet for viewing/editing prior to the editable check.
     html.on('click', '.item-edit', (ev) => {
@@ -238,11 +241,44 @@ export class BoilerplateActorSheet extends ActorSheet {
         var label = dataset.label ? `<span class="failure">[Statistique] ${dataset.label} ❌</span>` : '';
         if(resultdata.terms[0].results[0].result < stat && resultdata.terms[0].results[0].result!=1 ){
           label = dataset.label ? `<span class="success">[Statistique] ${dataset.label} ✅</span>` : '';
+          
         }
         else
         if (resultdata.terms[0].results[0].result == stat || resultdata.terms[0].results[0].result==1){
           label = dataset.label ? `<span class="critical">[Statistique] ${dataset.label} ⚠️</span>` : '';
+          
+          setTimeout(function(){
+            new Sequence()
+          .effect()
+              .file("modules/JB2A_DnD5e/Library/Generic/UI/Critical_03_Red_200x200.webm")
+              .atLocation(canvas.tokens.controlled[0])
+              .duration(3500)
+          .play();
+          }, 3000);
         }
+        else
+        if (resultdata.terms[0].results[0].result==20){
+          label = dataset.label ? `<span class="failure">[Statistique] ${dataset.label} Echec critique ⚠️</span>` : '';
+          /*
+          set timeout to 3 second for this function
+          new Sequence()
+          .effect()
+              .file("modules/JB2A_DnD5e/Library/Generic/UI/CriticalMiss_02_Red_200x200.webm")
+              .atLocation(canvas.tokens.controlled[0])
+          .play()
+          */
+          
+          setTimeout(function(){
+            new Sequence()
+          .effect()
+              .file("modules/JB2A_DnD5e/Library/Generic/UI/CriticalMiss_02_Red_200x200.webm")
+              .atLocation(canvas.tokens.controlled[0])
+              .duration(3500)
+          .play();
+          }, 3000);
+          
+        }
+        
       }
       else{
         label = dataset.label ? `[Statistique] ${dataset.label}` : '';

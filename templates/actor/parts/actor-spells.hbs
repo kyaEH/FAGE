@@ -17,9 +17,10 @@
       </div>
     </li>
     {{#each spells as |item id|}}
-      <li class='item flexrow' data-item-id='{{item._id}}'>
+    {{!-- Drag drop the items --}}
+      <li class='item flexrow' data-item-id='{{item._id}}' draggable="true">
         <div class='item-name flexrow'>
-          <div class='item-image'>
+          <div class='item-image' >
             <a class='rollable' data-roll-type='item'><img
                 src='{{item.img}}'
                 title='{{item.name}}'
@@ -27,7 +28,7 @@
                 height='24'
               /></a>
           </div>
-          <h4>{{item.name}}</h4>
+          <h4>{{item.name}} (Mana: {{system.power}}, Canalisation: {{system.canalisation}})</h4>
         </div>
         <div class='item-controls'>
           <a

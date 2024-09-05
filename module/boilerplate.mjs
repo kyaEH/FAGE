@@ -68,8 +68,13 @@ Hooks.once('init', function () {
       "id": "bouclier",
       "name": "Bouclier",
       "icon": "systems/fage/assets/shield.png"
-  },
-];
+    },
+    {
+      "id": "dead",
+      "name": "Mort",
+      "icon": "systems/fage/assets/dead.png"
+    },
+  ];
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });
@@ -228,7 +233,7 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
     // A character can always walk it's base speed and dash twice it's base speed
     const ranges = [
       {range: baseSpeed, color: "walk"},
-      {range: baseSpeed * 1.5, color: "dash"}
+      {range: baseSpeed * 1.5 + 5, color: "dash"}
     ]
 
     // Characters that aren't wearing armor are allowed to run with three times their speed
@@ -246,4 +251,21 @@ socket.on("updateTo", (request, ack) => {
 });
 
 
-//Hooks on token update health, console log the before and after token health
+//Hooks on spell drop into hotbar
+Hooks.on('hotbarDrop', (bar, data, slot) => {
+  console.log(data);
+  if (data.type === 'spell') {
+    const spell = game.items.get(data.id);
+    const update = {
+      _id: spell.id,
+      'data.preparation.prepared': !spell.data.data.preparation.prepared,
+    };
+    spell.update(update);
+  }
+});
+
+
+Hooks.on('ChatPortraitReplaceData', (chatPortraitCustomData, chatMessage) => {
+	const speaker = ChatMessage.getSpeakerActor(chatMessage.data.speaker);
+	return chatPortraitCustomData;
+});

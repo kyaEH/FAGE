@@ -5,8 +5,8 @@
       "Con": { "long": "Constitution", "abbr": "con" },
       "Dex": { "long": "Dexterity", "abbr": "dex" },
       "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
+      "Wis": { "long": "Focus", "abbr": "wis" },
+      "Cha": { "long": "Agility", "abbr": "cha" }
     },
     "SheetLabels": {
       "Actor": "Boilerplate Actor Sheet",

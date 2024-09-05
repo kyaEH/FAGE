@@ -13,6 +13,11 @@
           "min": 0,
           "max": 5
         },
+        "shield": {
+          "value": 0,
+          "min": 0,
+          "max": 500
+        },
         "biography": "",
         "race" : "",
         "faction": ""
@@ -166,7 +171,9 @@
     },
     "spell": {
       "templates": ["base"],
-      "spellLevel": 1
+      "spellLevel": 1,
+      "power" : 0,
+      "canalisation" : 0
     }
   }
 }

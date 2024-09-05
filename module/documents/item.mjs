@@ -50,6 +50,15 @@ export class BoilerplateItem extends Item {
         flavor: label,
         content: item.system.description ?? '',
       });
+      // spend power cost if item has cost then remove it from actor this.actor.system.power.value
+      if(item.system.power) {
+        var power = this.actor.system.power.value;
+        var cost = item.system.power;
+        var newpower = power - cost;
+        // Here, update the token 
+        
+        this.actor.update({'system.power.value': newpower})
+      }
     }
     // Otherwise, create a roll and send a chat message from it.
     else {
