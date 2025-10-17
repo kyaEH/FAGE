@@ -185,7 +185,7 @@ prepareDerivedData() {
   
   const precision = Math.min(18, 9 + Math.round(Agilité / 3 + Dextérité / 2 + precision_bonus));
   const degatphys = Math.round(Force * 1 + degats_bonus);
-  const magie = Math.round(Intelligence + Concentration / 2 + magie_bonus);
+  const magie = Math.round(Intelligence * 1.2 + Concentration / 1.75 + magie_bonus);
   const critique = Math.round(Force / 2 + Agilité / 2 + Concentration * 0.25);
   const buffdebuff = Math.min(17, 1 + Math.round(Concentration / 2 + Dextérité / 2 + Number(age.value)/20));
   const parade = Math.round(Constitution / 3 + parade_bonus);
@@ -200,7 +200,7 @@ prepareDerivedData() {
   const rapidite = Math.floor(6 + Agilité * 1.75 + Concentration * 0.6 + rapidite_bonus + (10 - Number(taille.value) / 20));
   const furtivite = Math.min(17, Math.max(4, Math.round(3 + Math.floor(Agilité / 2 + Concentration / 2.5))));
   const perception = Math.min(17, Math.floor(8 + Intelligence / 2 + Concentration * 0.75));
-  const powerMax = Math.floor(2 + Intelligence * 1.25 + Dextérité * 0.75);
+  const powerMax = Math.floor(2 + Intelligence * 1.5 + Dextérité);
   const healthMax = Math.floor(10 + Force * 1.25 + Constitution * 2 + Number(poids.value) / 15 + Number(level.value));
   const charisme = Math.min(17, 5 + Math.floor(Constitution / 1.75 + Intelligence / 1.75 + charisme_bonus + Number(taille.value) / 75));
   // Shield is just *2 hp
