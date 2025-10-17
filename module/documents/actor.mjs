@@ -56,6 +56,14 @@ prepareDerivedData() {
       let precision_bonus = 0;
       let rm_bonus = 0;
       let quantityMax = 0;
+      let critique_bonus = 0;
+      let buffdebuff_bonus = 0;
+      let esquive_bonus = 0;
+      let furtivite_bonus = 0;
+      let perception_bonus = 0;
+      let powerMax_bonus = 0;
+      let healthMax_bonus = 0;
+      let shield_bonus = 0;
       actorData.system.attributes.level.value = Math.floor(Math.max(1, Math.sqrt(Number(actorData.system.attributes.experience.value) / 5)) - 1);
 
       if (actorData.flags?.["fvtt-paper-doll-ui"]?.slots) {
@@ -92,6 +100,30 @@ prepareDerivedData() {
                 }
                 if(stat == "maxQuantity"){
                   quantityMax += Number(item.system.equipement.value);
+                }
+                if(stat == "critique"){
+                  critique_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "buffdebuff"){
+                  buffdebuff_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "esquive"){
+                  esquive_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "furtivite"){
+                  furtivite_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "perception"){
+                  perception_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "powerMax"){
+                  powerMax_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "healthMax"){
+                  healthMax_bonus += Number(item.system.equipement.value);
+                }
+                if(stat == "shield"){
+                  shield_bonus += Number(item.system.equipement.value);
                 }
                 /*$('[name="equipped_script"]').each(function() {
                   eval(htmlDecode($(this).val()));
@@ -133,6 +165,30 @@ prepareDerivedData() {
                 }
                 if(stat == "maxQuantity"){
                   quantityMax += Number(item2.system.equipement.value);
+                }
+                if(stat == "critique"){
+                  critique_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "buffdebuff"){
+                  buffdebuff_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "esquive"){
+                  esquive_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "furtivite"){
+                  furtivite_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "perception"){
+                  perception_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "powerMax"){
+                  powerMax_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "healthMax"){
+                  healthMax_bonus += Number(item2.system.equipement.value);
+                }
+                if(stat == "shield"){
+                  shield_bonus += Number(item2.system.equipement.value);
                 }
                 /*$('[name="equipped_script"]').each(function() {
                   eval(htmlDecode($(this).val()));
@@ -186,25 +242,25 @@ prepareDerivedData() {
   const precision = Math.min(18, 9 + Math.round(Agilité / 3 + Dextérité / 2 + precision_bonus));
   const degatphys = Math.round(Force * 1 + degats_bonus);
   const magie = Math.round(Intelligence * 1.2 + Concentration / 1.75 + magie_bonus);
-  const critique = Math.round(Force / 2 + Agilité / 2 + Concentration * 0.25);
-  const buffdebuff = Math.min(17, 1 + Math.round(Concentration / 2 + Dextérité / 2 + Number(age.value)/20));
+  const critique = Math.round(Force / 2 + Agilité / 2 + Concentration * 0.25 + critique_bonus);
+  const buffdebuff = Math.min(17, 1 + Math.round(Concentration / 2 + Dextérité / 2 + Number(age.value)/20 + buffdebuff_bonus));
   const parade = Math.round(Constitution / 3 + parade_bonus);
   const RM = Math.round(Constitution / 4 + Intelligence / 3 + rm_bonus);
   const esquive = Math.max(
     10,
     Math.min(
       75,
-      Math.round(Agilité + 90 - (Number(age.value) / 2 + Number(taille.value) / 10 + Number(poids.value) / 5))
+      Math.round(Agilité + 90 - (Number(age.value) / 2 + Number(taille.value) / 10 + Number(poids.value) / 5) + esquive_bonus)
     )
   );
   const rapidite = Math.floor(6 + Agilité * 1.75 + Concentration * 0.6 + rapidite_bonus + (10 - Number(taille.value) / 20));
-  const furtivite = Math.min(17, Math.max(4, Math.round(3 + Math.floor(Agilité / 2 + Concentration / 2.5))));
-  const perception = Math.min(17, Math.floor(8 + Intelligence / 2 + Concentration * 0.75));
-  const powerMax = Math.floor(2 + Intelligence * 1.5 + Dextérité);
-  const healthMax = Math.floor(10 + Force * 1.25 + Constitution * 2 + Number(poids.value) / 15 + Number(level.value));
+  const furtivite = Math.min(17, Math.max(4, Math.round(3 + Math.floor(Agilité / 2 + Concentration / 2.5) + furtivite_bonus)));
+  const perception = Math.min(17, Math.floor(8 + Intelligence / 2 + Concentration * 0.75 + perception_bonus));
+  const powerMax = Math.floor(2 + Intelligence * 1.5 + Dextérité + powerMax_bonus);
+  const healthMax = Math.floor(10 + Force * 1.25 + Constitution * 2 + Number(poids.value) / 15 + Number(level.value) + healthMax_bonus);
   const charisme = Math.min(17, 5 + Math.floor(Constitution / 1.75 + Intelligence / 1.75 + charisme_bonus + Number(taille.value) / 75));
   // Shield is just *2 hp
-  const shield = Math.floor(healthMax * 2);
+  const shield = Math.floor(healthMax * 2 + shield_bonus);
 
   statSecondaire.precision.value = precision;
   statSecondaire.degatphys.value = degatphys;
