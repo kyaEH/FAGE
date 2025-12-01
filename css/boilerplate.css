@@ -19,7 +19,6 @@
   display: grid;
   grid-column: span 2/span 2;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
   margin: 10px 0;
   padding: 0;
 }
@@ -168,6 +167,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 1px;
 }
 
 .flex-group-left {
@@ -222,7 +222,7 @@
   font-family: "Roboto", sans-serif;
 }
 .boilerplate input[type="text"],.boilerplate input[type="number"]{
-  color: #A3C7D6;
+  color: #c3edff;
 }
 
 .boilerplate h1,h2,h3{
@@ -257,6 +257,7 @@
 
 .boilerplate .sheet-header .header-fields {
   flex: 1;
+
 }
 .boilerplate .sheet-header h1.charname {
   height: 50px;
@@ -284,7 +285,7 @@
   padding: 0 8px;
 }
 .boilerplate .resource-label {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .boilerplate .items-header {
@@ -331,7 +332,6 @@
 .boilerplate .items-list .item-name h3, .boilerplate .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
-  overflow-x: hidden;
 }
 .boilerplate .items-list .item-controls {
   display: flex;
@@ -405,6 +405,7 @@
 }
 
 @layer fantasy-btn {
+  
   [class*="fantasy-btn"] {
     isolation: isolate;
     position: relative;
@@ -853,4 +854,41 @@ input[type="number"]{
 
 .token-resources .bar-container{
   width:100%;
+}
+
+img{
+  border: 1px solid #00000069;
+}
+
+.item-name h4{
+  font-size: 1em;
+}
+
+.editor-content p, .editor-content ul{
+  background-color: #00000098;
+  width: 100%;
+  margin:0;
+  padding: 2px;
+}
+
+.sheet {
+  min-width: 691px;
+}
+
+.sheet .editor-content {
+  height: 100%;
+  overflow-y: auto;
+  word-break: break-word;
+  border-radius: 5px;
+  color:white;
+}
+
+.header-ressources {
+  background-color: #00000069;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.tpa{
+  margin: 2px !important;
 }

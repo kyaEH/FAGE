@@ -33,7 +33,7 @@
     "verified": "12.324"
   },
   "esmodules": ["module/boilerplate.mjs"],
-  "styles": ["css/boilerplate.css"],
+  "styles": ["css/normalize.css","css/fanta.css","css/boilerplate.css"],
   "languages": [
     {
       "lang": "en",

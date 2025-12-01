@@ -234,8 +234,12 @@ export class BoilerplateActorSheet extends ActorSheet {
       console.log(dataset.label);
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       var statname = dataset.label.toLowerCase().replace("é", "e").replace("/", "_");
-      if(statname != "rapidite" && statname!= "degâts") {
+      let statsPrincipales = ["force", "constitution", "agilite", "intelligence", "concentration", "dexterite"];
+      //if statname is not rapidite, degats and is not in statsPrincipales
+      if(statname != "rapidite" && statname!= "degâts" && !statsPrincipales.includes(statname)) {
         
+        
+
         var stat = this.actor.getRollData().statSecondaire[statname].value;
         var resultdata = await roll.evaluate();
         var label = dataset.label ? `<span class="failure">[Statistique] ${dataset.label} ❌</span>` : '';
@@ -281,6 +285,8 @@ export class BoilerplateActorSheet extends ActorSheet {
         
       }
       else{
+        //if statprincipales
+        
         label = dataset.label ? `[Statistique] ${dataset.label}` : '';
       }
       

@@ -74,6 +74,16 @@ Hooks.once('init', function () {
       "name": "Mort",
       "icon": "systems/fage/assets/dead.png"
     },
+    {
+      "id" : "rage",
+      "name": "Rage",
+      "icon": "systems/fage/assets/rage.png"
+    },
+    {
+      "id" : "aveugle",
+      "name": "Aveuglé",
+      "icon": "systems/fage/assets/aveugle.png"
+    }
   ];
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
@@ -246,9 +256,6 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
   dragRuler.registerSystem("fage", FictionalGameSystemSpeedProvider)
 })
 
-socket.on("updateTo", (request, ack) => {
-  console.log(request);
-});
 
 
 //Hooks on spell drop into hotbar
